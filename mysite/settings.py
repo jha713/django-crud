@@ -145,4 +145,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CORS_ALLOWED_ORIGINS = [
     'https://create-react-app-site-production-edee.up.railway.app',
+    'http://localhost:3000',
 ]
