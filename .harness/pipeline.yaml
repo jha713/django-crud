@@ -33,3 +33,31 @@ pipeline:
                   spec:
                     shell: Sh
                     command: echo 'success'
+              - step:
+                  type: Run
+                  name: Run Tests
+                  identifier: run_tests
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: python:3.9
+                    shell: Sh
+                    command: |
+                      pip install django
+                      python -m pip install harness-featureflags
+                      pip install django-cors-headers
+                      pip install djangorestframework
+                      cd backend/user_api
+                      python manage.py test usersApp
+              - step:
+                  type: Run
+                  name: push to prod
+                  identifier: push_to_prod
+                  spec:
+                    shell: Sh
+                    command: |-
+                      git config --global user.email "jha.abhishek001@gmail.com"
+                      git config --global user.name "jha713"
+                      git fetch --all && git checkout prod  &&
+                              git merge origin/dev &&
+                              git push https://<+secrets.getValue("GIT_USERNAME")>:<+secrets.getValue("GIT_PASSWORD")>@github.com/jha713/featureflag_trinet.git prod ||
+                              echo "Error: Failed to move changes to prod branch"
