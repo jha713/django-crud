@@ -1,0 +1,14 @@
+inputSet:
+  name: new1
+  identifier: new1
+  orgIdentifier: default
+  projectIdentifier: fullstack_githu
+  pipeline:
+    identifier: pipeline
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
