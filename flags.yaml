@@ -20,6 +20,32 @@ featureFlags:
         default:
           onVariation: "true"
           offVariation: "false"
+        state: "off"
+  projectIdentifier: fullstack_githu
+  orgIdentifier: default
+
+featureFlags:
+  flags:
+  - flag:
+      name: crud
+      identifier: crud
+      description: ""
+      permanent: false
+      spec:
+        type: boolean
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        variations:
+        - identifier: "true"
+          value: "true"
+        - identifier: "false"
+          value: "false"
+      environments:
+      - identifier: dev
+        default:
+          onVariation: "true"
+          offVariation: "false"
         state: "on"
         targetRules:
         - targets:
