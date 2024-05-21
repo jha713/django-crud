@@ -21,6 +21,10 @@ featureFlags:
           onVariation: "true"
           offVariation: "false"
         state: "on"
+        targetRules:
+        - targets:
+          - identifier: Django_crud
+          variation: "true"
   projectIdentifier: fullstack_githu
   orgIdentifier: default
 
