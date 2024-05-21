@@ -47,7 +47,7 @@ pipeline:
                       pip install django-cors-headers
                       pip install djangorestframework
                       cd backend/user_api
-                      python manage.py test usersApp
+                      python manage.py test blog
               - step:
                   type: Run
                   name: push to prod
