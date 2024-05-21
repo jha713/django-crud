@@ -42,11 +42,8 @@ pipeline:
                     image: python:3.9
                     shell: Sh
                     command: |
-                      pip install django
-                      python -m pip install harness-featureflags
-                      pip install django-cors-headers
-                      pip install djangorestframework
-                      cd backend/user_api
+                      pip install -r requirements.txt
+                      cd django-crud/blog
                       python manage.py test blog
               - step:
                   type: Run
@@ -59,5 +56,5 @@ pipeline:
                       git config --global user.name "jha713"
                       git fetch --all && git checkout prod  &&
                               git merge origin/dev &&
-                              git push https://<+secrets.getValue("GIT_USERNAME")>:<+secrets.getValue("GIT_PASSWORD")>@github.com/jha713/featureflag_trinet.git prod ||
+                              git push https://<+secrets.getValue("GIT_USERNAME")>:<+secrets.getValue("GIT_PASSWORD")>@github.com/jha713/django-crud.git prod ||
                               echo "Error: Failed to move changes to prod branch"
