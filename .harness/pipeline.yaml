@@ -33,6 +33,42 @@ pipeline:
                   spec:
                     shell: Sh
                     command: echo 'success'
+
+pipeline:
+  name: pipeline
+  identifier: pipeline
+  projectIdentifier: fullstack_githu
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: new_crud
+        repoName: django-crud
+        build: <+input>
+  stages:
+    - stage:
+        name: build
+        identifier: build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    shell: Sh
+                    command: echo 'success'
               - step:
                   type: Run
                   name: Run Tests
