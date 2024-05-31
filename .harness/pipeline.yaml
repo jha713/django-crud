@@ -41,9 +41,12 @@ pipeline:
                     connectorRef: account.harnessImage
                     image: python:3.9
                     shell: Sh
-                    command: |
+                    command: |-
                       pip install -r requirements.txt
+                      if [ "<+pipeline.variables.crud>" = "1.0" ]; then
                       python manage.py test blog
+                      # code to be executed if the condition is false
+                      fi
               - step:
                   type: Run
                   name: push to prod
@@ -57,3 +60,9 @@ pipeline:
                               git merge origin/dev &&
                               git push https://<+secrets.getValue("GIT_USERNAME")>:<+secrets.getValue("GIT_PASSWORD")>@github.com/jha713/django-crud.git prod ||
                               echo "Error: Failed to move changes to prod branch"
+  variables:
+    - name: crud
+      type: Number
+      description: ""
+      required: true
+      value: <+input>
